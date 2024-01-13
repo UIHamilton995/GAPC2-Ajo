@@ -1,0 +1,8 @@
+{
+  "name": "server-ajo",
+  "version": "1.0.0",
+  "description": "Backend for Ajo GAP Project",
+  "main": "index.js",
+  "author": "DEVS",
+  "license": "MIT"
+}
