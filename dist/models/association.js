@@ -28,9 +28,6 @@ savings_1.default.belongsTo(users_1.default, {
 groups_1.default.hasMany(transactions_1.default, {
     foreignKey: "owner_id"
 });
-users_1.default.hasMany(Payments, {
-    foreignKey: "owner_id"
-});
 settings_1.default.belongsTo(users_1.default, {
     foreignKey: "owner_id"
 });

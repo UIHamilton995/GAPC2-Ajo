@@ -1,6 +1,3 @@
-
-
-
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -14,7 +11,7 @@ export default {
     DB_HOST: PROD_DB_HOST,
     DB_USERNAME: PROD_DB_USERNAME,
     DB_PASSWORD: PROD_DB_PASSWORD,
-    // DB_PORT,
+    DB_PORT,
 };
 
 console.log("running in production mode");

@@ -6,16 +6,21 @@
   "author": "DEVS",
   "license": "MIT",
   "scripts": {
-    "start": "node dist/server.js",
-    "dev": "nodemon src/server.ts",
+    "start": "cross-env NODE_ENV=development ts-node src/app.ts",
+    "dev": "nodemon src/app.ts",
     "build": "tsc"
   },
   "dependencies": {
+    "cross": "^1.0.0",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.3.1",
+    "env": "^0.0.2",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
+    "lodash.merge": "^4.6.2",
     "nodemon": "^3.0.2",
+    "pg": "^8.11.3",
     "postgres": "^3.4.3",
     "sequelize": "^6.35.2",
     "tsc": "^2.0.4",
@@ -26,10 +31,12 @@
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.21",
     "@types/jsonwebtoken": "^9.0.5",
+    "@types/lodash": "^4.14.202",
     "@types/lodash.merge": "^4.6.9",
     "@types/morgan": "^1.9.9",
     "@types/node": "^20.11.4",
     "@types/sequelize": "^4.28.20",
-    "@types/uuid": "^9.0.7"
+    "@types/uuid": "^9.0.7",
+    "ts-node": "^10.9.2"
   }
 }

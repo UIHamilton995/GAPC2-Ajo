@@ -1,24 +1,30 @@
 import express from 'express';
-import{ db } from './config'
-import dev from './config/dev';
-
-const app = express();
-const port = 3000;
+import dotenv from 'dotenv';
+import { loggerMiddleware } from './config/logger';
+import { db } from './config';
 
 dotenv.config();
-app.use(logger(dev))
+
+const app = express();
+const port = process.env.PORT || 3000;
+
+app.use(loggerMiddleware);
+
 app.get('/', (req, res) => {
-  res.send('Hello, World!');
+    res.send('Hello, World!');
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+const startServer = async () => {
+    try {
+        await db.authenticate(); // Use authenticate instead of sync
+        console.log('Database is connected');
 
-db.sync({})
-  .then(() => {
-    console.log("Database is connected");
-  })
-  .catch((err: HttpError) => {
-    console.log(err);
-  });
+        app.listen(port, () => {
+            console.log(`Server is running on http://localhost:${port}`);
+        });
+    } catch (err) {
+        console.error('Error connecting to the database:', err);
+    }
+};
+
+startServer();
