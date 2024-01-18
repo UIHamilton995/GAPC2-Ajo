@@ -1,6 +1,7 @@
 import { Model, DataTypes } from "sequelize";
 import Transactions from "./transactions";
 import { db } from "../config";
+import bcrypt from "bcrypt";
 
 export enum role {
   ADMIN = "Admin",
@@ -123,5 +124,6 @@ Users.init(
   modelName: "Users"
 }
 )
+
 
 export default Users
