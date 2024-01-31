@@ -1,14 +1,12 @@
 import { Model, DataTypes } from "sequelize";
-import Transactions from "./transactions";
-import { db } from "../config";
+import { db } from '../config';
 
 export enum role {
   ADMIN = "Admin",
-  CONTRIBUTOR = "Contributor" //NORMAL USER
+  CONTRIBUTOR = "Contributor" // NORMAL USER
 }
 
-export type UserAttributes = {
-  [x: string]: any;
+export interface UserAttributes {
   id: string;
   firstName: string;
   lastName: string;
@@ -17,28 +15,40 @@ export type UserAttributes = {
   password: string;
   role: string;
   phone: string;
-  created_at: Date;
-  gender: string
-  occupation: string
-  date_of_birth: Date
-  bvn: string
-  address: string
-  identification_number: string
-  identification_doc: string
-  proof_of_address_doc: string
-  otp: string | null
-  // identification_type?: identificationType
-};
-
-class Users extends Model<UserAttributes>{
-    wallet_amount: any;
-    created_at!: Date;
-    static firstName: any;
-  otp!: string;
-  static otp: any;
-    
+  createdAt: Date;
+  updatedAt: Date;
+  gender: string;
+  occupation: string;
+  date_of_birth: Date;
+  bvn: string;
+  address: string;
+  identification_number: string;
+  identification_doc: string;
+  proof_of_address_doc: string;
+  otp: string | null;
 }
 
+class Users extends Model<UserAttributes> {
+  public id!: string;
+  public firstName!: string;
+  public lastName!: string;
+  public email!: string;
+  public profilePic!: string;
+  public password!: string;
+  public role!: string;
+  public phone!: string;
+  public createdAt!: Date;
+  public updatedAt!: Date;
+  public gender!: string;
+  public occupation!: string;
+  public date_of_birth!: Date;
+  public bvn!: string;
+  public address!: string;
+  public identification_number!: string;
+  public identification_doc!: string;
+  public proof_of_address_doc!: string;
+  public otp!: string | null;
+}
 
 Users.init(
   {
@@ -67,7 +77,7 @@ Users.init(
       type: DataTypes.STRING,
       allowNull: true
     },
-    otp:{
+    otp: {
       type: DataTypes.STRING,
       allowNull: true
     },
@@ -79,7 +89,12 @@ Users.init(
       type: DataTypes.STRING,
       allowNull: false
     },
-    created_at: {
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW
+    },
+    updatedAt: {
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: DataTypes.NOW
@@ -95,33 +110,35 @@ Users.init(
     date_of_birth: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: DataTypes.DATE
+      defaultValue: DataTypes.NOW
     },
     bvn: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     address: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     identification_number: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     identification_doc: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     proof_of_address_doc: {
       type: DataTypes.STRING,
-      allowNull: false
-    }
-  }, {
-  sequelize: db,
-  tableName: "Users",
-  modelName: "Users"
-}
-)
+      allowNull: true
+    },
+  },
+  {
+    sequelize: db,
+    tableName: "Users",
+    modelName: "Users",
+    timestamps: false
+  }
+);
 
-export default Users
+export default Users;
