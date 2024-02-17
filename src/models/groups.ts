@@ -27,7 +27,7 @@ export interface Members {
   profilePicture?: string;
 }
 export type GroupAttributes = {
-  id: string;
+  id?: string;
 
   title: string; //group name
   description: string; //purpose and goals

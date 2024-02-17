@@ -21,6 +21,7 @@ enum category {
 export type SavingAttributes = {
   id: string;
   user_id: string;
+  group_id: string;
   name: string;
   target: string;
   target_amount: number;
@@ -45,6 +46,13 @@ Savings.init(
       allowNull: false,
     },
     user_id: {
+      type: DataTypes.UUID,
+      references: {
+        model: Users,
+        key: "id",
+      },
+    },
+    group_id: {
       type: DataTypes.UUID,
       references: {
         model: Users,

@@ -2,8 +2,9 @@ import express from 'express';
 import dotenv from 'dotenv';
 import { loggerMiddleware } from './config/logger';
 import { db } from './config';
-import { signup, login } from './controller/authController';
+import UserRouter from './routes/users';
 import bodyParser from 'body-parser';
+
 
 dotenv.config();
 
@@ -16,15 +17,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Middleware
 app.use(loggerMiddleware);
+app.use('/users',UserRouter)
 
 // Route and Url confirmation example
 app.get('/', (req, res) => {
     res.send('Hello, World!');
 });
 
-// Call the route
-app.post('/auth/signup', signup);
-app.post('/auth/login', login);
+
 
 const startServer = async () => {
     try {

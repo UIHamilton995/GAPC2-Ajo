@@ -1,5 +1,8 @@
 import { Model, DataTypes } from "sequelize";
-import { db } from '../config';
+import Transactions from "./transactions";
+import { db } from "../config";
+import Savings from "./savings";
+
 
 export enum role {
   ADMIN = "Admin",
@@ -21,6 +24,7 @@ export interface UserAttributes {
   occupation: string;
   date_of_birth: Date;
   bvn: string;
+  savings: Savings[];  
   address: string;
   identification_number: string;
   identification_doc: string;
@@ -43,6 +47,7 @@ class Users extends Model<UserAttributes> {
   public occupation!: string;
   public date_of_birth!: Date;
   public bvn!: string;
+  public savings!: Savings[];
   public address!: string;
   public identification_number!: string;
   public identification_doc!: string;
@@ -116,6 +121,10 @@ Users.init(
       type: DataTypes.STRING,
       allowNull: true
     },
+    savings: {
+      type: DataTypes.ARRAY(DataTypes.JSONB),
+      allowNull: true
+    },
     address: {
       type: DataTypes.STRING,
       allowNull: true
@@ -141,4 +150,7 @@ Users.init(
   }
 );
 
+
+
 export default Users;
+
