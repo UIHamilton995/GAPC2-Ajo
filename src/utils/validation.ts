@@ -1,6 +1,8 @@
+import { createGroup } from './../controller/userController';
 
 import bcrypt from "bcrypt";
 import Joi from "joi";
+import { start } from 'repl';
 
 export const option = {
   abortearly: false,
@@ -24,6 +26,29 @@ export const resetPasswordSchema = Joi.object().keys({
       confirm_password: Joi.any().equal(Joi.ref('password')).required().label('confirm password')
 })
 
+export const createGroupSchema = Joi.object().keys({
+    title: Joi.string().required(),
+    description: Joi.string().required(),
+    group_image: Joi.string().required(),
+    contribution_amount: Joi.number().required(),
+    amount_withdrawn: Joi.number().required(),
+    number_of_participants: Joi.number().required(),
+    frequency: Joi.string().required(),
+    duration: Joi.string().required(),
+    startDate: Joi.date().required(),
+    endDate: Joi.date().required()
+})
+
+export const  createSavingsSchema = Joi.object().keys({
+  name: Joi.string().required(),
+  target: Joi.string().required(),
+  target_amount: Joi.number().required(),
+  amount_saved: Joi.number().required(),
+  frequency: Joi.string().required(),
+  category: Joi.string().required(),
+  startDate: Joi.date().required(),
+  endDate: Joi.date().required()
+})
 
 //SENDING OTP TO PHONE
 export const accountSid = process.env.ACCOUNTSID;

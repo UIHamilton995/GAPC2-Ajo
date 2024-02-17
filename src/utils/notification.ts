@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer'
-import { FromAdminMail, GMAIL_PASS, GMAIL_USER, accountSid, authToken, fromAdminPhone, userSubject } from './validation';
+import {  GMAIL_PASS, GMAIL_USER, MailFromAdmin, accountSid, authToken, fromAdminPhone, userSubject } from './validation';
 
 export const GenerateOTP = ()=>{
   const otp = Math.floor(1000 + Math.random() * 9000);
@@ -38,7 +38,7 @@ export const mailSent = async(
 ) => {
   try{
     const response = await transport.sendMail({
-    from: FromAdminMail, subject:userSubject, to, html
+    from: MailFromAdmin, subject:userSubject, to, html
     })
     return response
   }catch(err){
@@ -67,9 +67,8 @@ export const mailSent = async(
   )=>{
     try {
      const response = await transport.sendMail(
-        { from: FromAdminMail,
-            subject:
-            userSubject,
+        { from: MailFromAdmin,
+            subject:  userSubject,
             to,
             html})
             return response
